@@ -3,6 +3,18 @@ services:
   mariadb:
     environment:
       MYSQL_ROOT_PASSWORD: "password"
+    expose:
+      - "3306"
     image: "mariadb"
+  rails:
+    build: "./docker-compose/rails/"
+    environment:
+      RAILS_DATABASE_HOST: "mariadb"
+      RAILS_DATABASE_PASSWORD: "password"
+      RAILS_DATABASE_PORT: "3306"
+      RAILS_DATABASE_USERNAME: "root"
+    image: "cojt-board-project-rails"
     ports:
-      - "3306:3306"
+      - "3000:3000"
+    volumes:
+      - "./:/app/rails"
