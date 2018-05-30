@@ -13,9 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: password
-  host: 127.0.0.1
+  username: <%= ENV['RAILS_DATABASE_USERNAME'] %>
+  password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>
+  host: <%= ENV['RAILS_DATABASE_HOST'] %>
 
 development:
   <<: *default
@@ -50,5 +50,3 @@ test:
 production:
   <<: *default
   database: cojt_board_project_production
-  username: cojt_board_project
-  password: <%= ENV['COJT_BOARD_PROJECT_DATABASE_PASSWORD'] %>
