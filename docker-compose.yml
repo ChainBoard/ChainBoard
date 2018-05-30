@@ -7,7 +7,12 @@ services:
       - "3306"
     image: "mariadb"
   rails:
-    build: "./docker-compose/rails/"
+    build:
+      args:
+        RAILS_GEMFILE: "Gemfile"
+        RAILS_GEMFILE_LOCK: "Gemfile.lock"
+      context: "./"
+      dockerfile: "./docker-compose/dockerfile.rails"
     environment:
       RAILS_DATABASE_HOST: "mariadb"
       RAILS_DATABASE_PASSWORD: "password"

@@ -1,0 +1,30 @@
+FROM ruby:2.5.1
+
+ARG RAILS_GEMFILE
+ARG RAILS_GEMFILE_LOCK
+
+ENV DOCKERIZE_VERSION v0.6.1
+
+RUN apt update \
+    && apt upgrade -y
+
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+WORKDIR /app/rails
+
+COPY $RAILS_GEMFILE /app/rails
+COPY $RAILS_GEMFILE_LOCK /app/rails
+
+RUN gem install bundler \
+    && bundle install --path /app/vendor/bundle
+
+RUN echo '#!/bin/bash' >> /docker-entrypoint.sh \
+    && echo 'cd /app/rails' >> /docker-entrypoint.sh \
+    && echo 'dockerize -wait tcp://$RAILS_DATABASE_HOST:$RAILS_DATABASE_PORT' >> /docker-entrypoint.sh \
+    && echo 'bundle exec rails db:create db:migrate' >> /docker-entrypoint.sh \
+    && echo 'bundle exec rails server -b 0.0.0.0' >> /docker-entrypoint.sh \
+    && chmod 755 /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
