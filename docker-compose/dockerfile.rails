@@ -1,7 +1,5 @@
 FROM ruby:2.5.1
 
-ARG DEPLOY_USER_GID
-ARG DEPLOY_USER_UID
 ARG RAILS_GEMFILE
 ARG RAILS_GEMFILE_LOCK
 
@@ -14,25 +12,19 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-RUN groupadd -g $DEPLOY_USER_GID deploy \
-    && useradd -g $DEPLOY_USER_GID -m -u $DEPLOY_USER_UID deploy
+WORKDIR /app/rails
+
+COPY $RAILS_GEMFILE /app/rails
+COPY $RAILS_GEMFILE_LOCK /app/rails
+
+RUN gem install bundler \
+    && bundle install --path /app/vendor/bundle
 
 RUN echo '#!/bin/bash' >> /docker-entrypoint.sh \
-    && echo 'cd /home/deploy/app' >> /docker-entrypoint.sh \
-    && echo 'if [ -f tmp/pids/server.pid ]; then rm tmp/pids/server.pid; fi' >> /docker-entrypoint.sh \
+    && echo 'cd /app/rails' >> /docker-entrypoint.sh \
     && echo 'dockerize -wait tcp://$RAILS_DATABASE_HOST:$RAILS_DATABASE_PORT' >> /docker-entrypoint.sh \
-    && echo 'bundle install' >> /docker-entrypoint.sh \
-    && echo 'bundle exec rails db:create db:migrate db:seed' >> /docker-entrypoint.sh \
+    && echo 'bundle exec rails db:create db:migrate' >> /docker-entrypoint.sh \
     && echo 'bundle exec rails server -b 0.0.0.0' >> /docker-entrypoint.sh \
     && chmod 755 /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-
-USER deploy
-WORKDIR /home/deploy/app
-
-COPY $RAILS_GEMFILE /home/deploy/app
-COPY $RAILS_GEMFILE_LOCK /home/deploy/app
-
-RUN gem install bundler \
-    && bundle install
