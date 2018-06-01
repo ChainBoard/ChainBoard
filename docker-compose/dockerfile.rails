@@ -24,7 +24,7 @@ RUN echo '#!/bin/bash' >> /docker-entrypoint.sh \
     && echo 'cd /app' >> /docker-entrypoint.sh \
     && echo 'bundle install' >> /docker-entrypoint.sh \
     && echo 'dockerize -wait tcp://$RAILS_DATABASE_HOST:$RAILS_DATABASE_PORT' >> /docker-entrypoint.sh \
-    && echo 'bundle exec rails db:create db:migrate' >> /docker-entrypoint.sh \
+    && echo 'bundle exec rails db:create db:migrate db:seed' >> /docker-entrypoint.sh \
     && echo 'bundle exec rails server --binding=0.0.0.0 --pid=/tmp/server.pid' >> /docker-entrypoint.sh \
     && chmod 755 /docker-entrypoint.sh
 
