@@ -9,6 +9,8 @@ services:
   rails:
     build:
       args:
+        DEPLOY_USER_GID: "$GID"
+        DEPLOY_USER_UID: "$UID"
         RAILS_GEMFILE: "Gemfile"
         RAILS_GEMFILE_LOCK: "Gemfile.lock"
       context: "./"
@@ -22,4 +24,4 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - "./:/app/rails"
+      - "./:/home/deploy/app"
