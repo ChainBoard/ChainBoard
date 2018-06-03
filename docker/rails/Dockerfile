@@ -4,10 +4,12 @@ ARG GEMFILE
 ARG GEMFILE_LOCK
 
 ENV DOCKERIZE_VERSION="v0.6.1" \
+    RAILS_DATABASE="" \
     RAILS_DATABASE_HOST="" \
     RAILS_DATABASE_PASSWORD="" \
     RAILS_DATABASE_PORT="" \
     RAILS_DATABASE_USERNAME="" \
+    RAILS_ENV="" \
     RAILS_ROOT="/var/www/app/"
 
 COPY ["$GEMFILE", \
@@ -22,6 +24,7 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && bundle install \
     && echo '#!/bin/bash\n\
 dockerize -wait tcp://$RAILS_DATABASE_HOST:$RAILS_DATABASE_PORT\n\
+bundle exec rails assets:precompile\n\
 bundle exec rails db:create db:migrate db:seed\n\
 bundle exec "$@"' >> /docker-entrypoint.sh \
     && chmod 755 /docker-entrypoint.sh

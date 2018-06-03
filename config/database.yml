@@ -49,4 +49,4 @@ test:
 #
 production:
   <<: *default
-  database: cojt_board_project_production
+  database: <%= ENV['RAILS_DATABASE'] %>

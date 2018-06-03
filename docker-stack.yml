@@ -1,0 +1,36 @@
+version: "3"
+services:
+  mariadb:
+    environment:
+      MYSQL_DATABASE: "cojtswbp_database"
+      MYSQL_PASSWORD: "cojtswbp_drowssap"
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: "cojtswbp_user"
+    expose:
+      - "3306"
+    image: "mariadb"
+  nginx:
+    image: "nginx"
+    ports:
+      - "80:80"
+    volumes:
+      - "./:/var/www/app"
+      - "./docker/nginx/conf.d:/etc/nginx/conf.d"
+  rails:
+    build:
+      args:
+        GEMFILE: "Gemfile"
+        GEMFILE_LOCK: "Gemfile.lock"
+      context: "./"
+      dockerfile: "./docker/rails/Dockerfile"
+    command: "puma -w 4"
+    environment:
+      RAILS_DATABASE: "cojtswbp_database"
+      RAILS_DATABASE_HOST: "mariadb"
+      RAILS_DATABASE_PASSWORD: "cojtswbp_drowssap"
+      RAILS_DATABASE_PORT: "3306"
+      RAILS_DATABASE_USERNAME: "cojtswbp_user"
+      RAILS_ENV: "production"
+    image: "cojt-board-project-rails"
+    volumes:
+      - "./:/var/www/app"
