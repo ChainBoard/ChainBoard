@@ -18,6 +18,7 @@ services:
       RAILS_DATABASE_PASSWORD: "password"
       RAILS_DATABASE_PORT: "3306"
       RAILS_DATABASE_USERNAME: "root"
+      RAILS_ROOT: "/var/www/app/"
     image: "cojt-board-project-rails"
     ports:
       - "3000:3000"

@@ -23,6 +23,8 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && gem install bundler \
     && bundle install \
     && echo '#!/bin/bash\n\
+if [ -f tmp/pids/server.pid ]; then rm tmp/pids/server.pid; fi\n\
+if [ -f tmp/sockets/puma.sock ]; then rm tmp/sockets/puma.sock; fi\n\
 dockerize -wait tcp://$RAILS_DATABASE_HOST:$RAILS_DATABASE_PORT\n\
 bundle exec rails assets:precompile\n\
 bundle exec rails db:create db:migrate db:seed\n\

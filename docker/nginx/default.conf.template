@@ -1,5 +1,5 @@
 upstream app {
-  server unix:///var/www/app/tmp/sockets/puma.sock;
+  server unix://${RAILS_ROOT}tmp/sockets/puma.sock;
 }
 
 server {
@@ -12,9 +12,9 @@ server {
   keepalive_timeout 5;
 
   # path for static files
-  root /var/www/app/public;
-  access_log /var/www/app/log/nginx.access.log;
-  error_log /var/www/app/log/nginx.error.log info;
+  root ${RAILS_ROOT}public;
+  access_log ${RAILS_ROOT}log/nginx.access.log;
+  error_log ${RAILS_ROOT}log/nginx.error.log info;
 
   # this rewrites all the requests to the maintenance.html
   # page if it exists in the doc root. This is for capistrano's

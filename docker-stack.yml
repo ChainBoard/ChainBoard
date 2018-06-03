@@ -10,12 +10,15 @@ services:
       - "3306"
     image: "mariadb"
   nginx:
+    command: "/bin/sh -c \"envsubst '$$RAILS_ROOT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'\""
+    environment:
+      RAILS_ROOT: "/var/www/app/"
     image: "nginx"
     ports:
       - "80:80"
     volumes:
       - "./:/var/www/app"
-      - "./docker/nginx/conf.d:/etc/nginx/conf.d"
+      - "./docker/nginx/default.conf.template:/etc/nginx/conf.d/default.conf.template"
   rails:
     build:
       args:
@@ -31,6 +34,7 @@ services:
       RAILS_DATABASE_PORT: "3306"
       RAILS_DATABASE_USERNAME: "cojtswbp_user"
       RAILS_ENV: "production"
+      RAILS_ROOT: "/var/www/app/"
     image: "cojt-board-project-rails"
     volumes:
       - "./:/var/www/app"
