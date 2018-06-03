@@ -9,16 +9,16 @@ services:
   rails:
     build:
       args:
-        RAILS_GEMFILE: "Gemfile"
-        RAILS_GEMFILE_LOCK: "Gemfile.lock"
+        GEMFILE: "Gemfile"
+        GEMFILE_LOCK: "Gemfile.lock"
       context: "./"
-      dockerfile: "./docker-compose/dockerfile.rails"
+      dockerfile: "./docker-compose/rails/Dockerfile"
     environment:
       RAILS_DATABASE_HOST: "mariadb"
       RAILS_DATABASE_PASSWORD: "password"
       RAILS_DATABASE_PORT: "3306"
       RAILS_DATABASE_USERNAME: "root"
-    image: "cojt-board-project-rails"
+    image: "cojt-board-project-compose-rails"
     ports:
       - "3000:3000"
     volumes:
