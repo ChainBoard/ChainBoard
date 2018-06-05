@@ -3,18 +3,20 @@
 
 div.container
   - @comments.each do |comment|
-      div.card.card-default
-      ul
-        li
-          | id:&nbsp;
-          = link_to(comment_path(comment)) do
-            = comment.id
-        li body: #{comment.body}
-        li user_display_name: #{comment.user_display_name}
-        li user_name: #{comment.user_name}
-        li created_at: #{comment.created_at}
-        li
-          | parent:
-          - if comment.comment.present?
-            = link_to(comment_path(comment.comment)) do
-              = comment.comment.id
+      div
+        div.card-block
+          div.card.card-default.
+            ul
+              li
+                | id:&nbsp;
+                = link_to(comment_path(comment)) do
+                  = comment.id
+              li body: #{comment.body}
+              li user_display_name: #{comment.user_display_name}
+              li user_name: #{comment.user_name}
+              li created_at: #{comment.created_at}
+              li
+                | parent:
+                - if comment.comment.present?
+                  = link_to(comment_path(comment.comment)) do
+                    = comment.comment.id
