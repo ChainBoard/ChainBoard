@@ -3,22 +3,23 @@ services:
   mariadb:
     environment:
       MYSQL_DATABASE: "cojtswbp_database"
-      MYSQL_PASSWORD: "cojtswbp_drowssap"
+      MYSQL_PASSWORD: "cojtswbp_password"
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_USER: "cojtswbp_user"
     expose:
       - "3306"
     image: "mariadb"
+    volumes:
+      - "./docker/mariadb/data:/var/lib/mysql"
   nginx:
-    command: "/bin/sh -c \"envsubst '$$RAILS_ROOT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'\""
+    command: "/bin/sh -c \"envsubst '$$RAILS_ROOT' < /var/www/app/docker/nginx/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'\""
     environment:
       RAILS_ROOT: "/var/www/app/"
     image: "nginx"
     ports:
       - "80:80"
     volumes:
-      - "./:/var/www/app"
-      - "./docker/nginx/default.conf.template:/etc/nginx/conf.d/default.conf.template"
+      - "./:/var/www/app/"
   rails:
     build:
       args:
@@ -30,11 +31,11 @@ services:
     environment:
       RAILS_DATABASE: "cojtswbp_database"
       RAILS_DATABASE_HOST: "mariadb"
-      RAILS_DATABASE_PASSWORD: "cojtswbp_drowssap"
+      RAILS_DATABASE_PASSWORD: "cojtswbp_password"
       RAILS_DATABASE_PORT: "3306"
       RAILS_DATABASE_USERNAME: "cojtswbp_user"
       RAILS_ENV: "production"
       RAILS_ROOT: "/var/www/app/"
     image: "cojt-board-project-rails"
     volumes:
-      - "./:/var/www/app"
+      - "./:/var/www/app/"

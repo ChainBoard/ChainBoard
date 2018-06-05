@@ -28,8 +28,8 @@ if [ -f tmp/sockets/puma.sock ]; then rm tmp/sockets/puma.sock; fi\n\
 dockerize -wait tcp://$RAILS_DATABASE_HOST:$RAILS_DATABASE_PORT\n\
 bundle exec rails assets:precompile\n\
 bundle exec rails db:create db:migrate db:seed\n\
-bundle exec "$@"' >> /docker-entrypoint.sh \
-    && chmod 755 /docker-entrypoint.sh
+bundle exec "$@"' >> /usr/local/bin/docker-entrypoint.sh \
+    && chmod 755 /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["rails", "server", "--binding=0.0.0.0"]
