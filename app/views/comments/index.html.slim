@@ -2,13 +2,12 @@ head
   title CojtBoardProject
 
 body
-  h1 CojtBoardProject
+  /h1 CojtBoardProject
   /p Find me in app/views/comments/index.html.slim
 
-
-  ol
+  div.container
     - @comments.each do |comment|
-      li
+        div.card.card-default
         ul
           li
             | id:&nbsp;
