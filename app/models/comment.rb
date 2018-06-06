@@ -6,6 +6,7 @@ class Comment < ApplicationRecord
   validates :user_name, length: { maximum: 16 }, presence: true
 
   searchable do
+    integer :id
     text :body
     string :user_display_name
     string :user_name
