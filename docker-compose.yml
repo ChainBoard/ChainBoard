@@ -19,6 +19,8 @@ services:
       RAILS_DATABASE_PORT: "3306"
       RAILS_DATABASE_USERNAME: "root"
       RAILS_ROOT: "/var/www/app/"
+      RAILS_SOLR_HOST: "solr"
+      RAILS_SOLR_PATH: "/solr/mycore"
     image: "cojt-board-project-rails"
     ports:
       - "3000:3000"
@@ -29,3 +31,5 @@ services:
     expose:
       - "8983"
     image: "solr"
+    ports:
+      - "8983:8983"
