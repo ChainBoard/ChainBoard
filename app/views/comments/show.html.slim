@@ -1,6 +1,16 @@
 h1 Comments#show
 p Find me in app/views/comments/show.html.slim
 
+= form_with(model: @new_comment, local: true) do |f|
+  = f.label(:body)
+  = f.text_area(:body)
+  = f.label(:user_name)
+  = f.text_field(:user_name)
+  = f.label(:user_display_name)
+  = f.text_field(:user_display_name)
+  = f.hidden_field(:comment_id)
+  = f.submit
+
 ul
   li
     | id:
