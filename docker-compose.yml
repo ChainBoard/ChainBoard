@@ -24,3 +24,8 @@ services:
       - "3000:3000"
     volumes:
       - "./:/var/www/app/"
+  solr:
+    entrypoint: "docker-entrypoint.sh solr-precreate mycore"
+    expose:
+      - "8983"
+    image: "solr"
