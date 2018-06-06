@@ -4,7 +4,7 @@
 div.container
   div.card-block
     - @comments.each do |comment|
-      div.card.card-default.
+      div.card.card-default.mb-3
         div.card-block
           h3
             | ID:&nbsp;
@@ -18,4 +18,4 @@ div.container
             | User Name: #{comment.user_display_name} (🔑:#{comment.user_name})
           p #{comment.body}
           h5.text-muted Date: #{comment.created_at}
-
+          
