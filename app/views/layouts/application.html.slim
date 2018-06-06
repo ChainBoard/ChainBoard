@@ -10,22 +10,22 @@ html
     script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"
     = javascript_include_tag 'application'
-  body
+  body style="padding-top:4.5rem;"
     .bs-component
-      nav.navbar.navbar-dark.bg-inverse.navbar-expand-md
+      nav.navbar.navbar-dark.bg-dark.navbar-expand-md.fixed-top
         div.container
           a.navbar-brand  href="/" CojtBoardProject
           button.navbar-toggler aria-controls="Navbar" aria-expanded="false" aria-label="Toggle Navigation" data-target="#Navbar" data-toggle="collapse" type="button" 
             span.navbar-toggler-icon
           #Navbar.collapse.navbar-collapse
-            form.form-inline.my-2.my-lg-0
-              input.form-control.mr-sm-2 aria-label="" placeholder="" type="search" /
-              button.btn.btn-primary.my-sm-0 type="submit"  Search
-            ul.navbar-nav.mr-auto
-              li.nav-item
-                a.nav-link href="#"  Some
-              li.nav-item
-                a.nav-link href="#"  Thing
+            div.mx-auto
+              form.form-inline.mt-2.mt-md-1
+                input.form-control.mr-sm-2 aria-label="" placeholder="" type="search" /
+                button.btn.btn-light.my-2.my-sm-0 type="submit"  Search
+            div
+              div.navbar-nav
+                a.nav-item.nav-link href="#"  Some
+                a.nav-item.nav-link href="#"  Thing
           /button.navbar-toggler.hidden-lg-up aria-controls="navbarResponsive" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarResponsive3" data-toggle="collapse" type="button" 
             #navbarResponsive.collapse.navbar-toggleable-md.navbarResponsive
               form.form-inline
