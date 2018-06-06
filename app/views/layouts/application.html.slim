@@ -12,16 +12,27 @@ html
     = javascript_include_tag 'application'
   body
     .bs-component
-    nav.navbar.navbar-dark.bg-inverse
-      button.navbar-toggler.hidden-lg-up aria-controls="navbarResponsive" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarResponsive3" data-toggle="collapse" type="button" 
-      #navbarResponsive3.container.collapse.navbar-toggleable-md
-        .navbar-brand CojtBoardProject
-        ul.nav.navbar-nav
-          li.nav-item
-            a.nav-link href="/" 
-              | Home
-              span.sr-only (current)
-        form.form-inline.float-lg-right
-          input.form-control placeholder="Search" type="text" /
-          button.btn.btn-primary type="submit"  検索
+      nav.navbar.navbar-dark.bg-inverse.navbar-expand-md
+        div.container
+          a.navbar-brand  href="/" CojtBoardProject
+          button.navbar-toggler aria-controls="Navbar" aria-expanded="false" aria-label="Toggle Navigation" data-target="#Navbar" data-toggle="collapse" type="button" 
+            span.navbar-toggler-icon
+          #Navbar.collapse.navbar-collapse
+            form.form-inline.my-2.my-lg-0
+              input.form-control.mr-sm-2 aria-label="" placeholder="" type="search" /
+              button.btn.btn-primary.my-sm-0 type="submit"  Search
+            ul.navbar-nav.mr-auto
+              li.nav-item
+                a.nav-link href="#"  Some
+              li.nav-item
+                a.nav-link href="#"  Thing
+          /button.navbar-toggler.hidden-lg-up aria-controls="navbarResponsive" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarResponsive3" data-toggle="collapse" type="button" 
+            #navbarResponsive.collapse.navbar-toggleable-md.navbarResponsive
+              form.form-inline
+                input.form-control placeholder="Search" type="text"
+                button.btn.btn-primary type="submit"  検索
+              
+            
+          
+        
     = yield
