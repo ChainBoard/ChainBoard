@@ -4,9 +4,10 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @new_comment = Comment.new
     @comment = Comment.includes(:comment).find_by(id: params[:id])
     @child_comments = Comment.where(comment: @comment)
+
+    @new_comment = Comment.new(comment: @comment)
   end
 
   def create
