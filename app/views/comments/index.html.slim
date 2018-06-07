@@ -12,6 +12,6 @@
               = link_to(comment_path(comment.comment)) do
                 = comment.comment.id
           h3
-            | User Name: #{comment.user_display_name} (🔑:#{comment.user_name})
+            | User Name: #{comment.user_display_name} (KEY:#{comment.user_name})
           p #{comment.body}
           h5.text-muted Date: #{comment.created_at}
