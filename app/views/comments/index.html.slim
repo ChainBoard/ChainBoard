@@ -1,17 +1,21 @@
 .container
   .card-block
     - @comments.each do |comment|
-      .card.card-default.
-        .card-block
-          h3
-            | ID:&nbsp;
-            = link_to(comment_path(comment)) do
-              = comment.id
-            | Parent's ID:
-            - if comment.comment.present?
-              = link_to(comment_path(comment.comment)) do
-                = comment.comment.id
-          h3
-            | User Name: #{comment.user_display_name} (🔑:#{comment.user_name})
-          p #{comment.body}
-          h5.text-muted Date: #{comment.created_at}
+      .card.card-default.mb-3
+        .card-block.m-3
+          .d-flex
+            span.h3
+              | ID:
+              = link_to(comment.id, comment_path(comment))
+            span.h3.ml-3
+              | Parent's ID:
+              - if comment.comment.present?
+                = link_to(comment.comment.id,comment_path(comment.comment))
+          p.text-muted.d-none.d-md-block #{comment.comment.body}
+          p.h4 #{comment.body}
+          .d-lg-flex.justify-content-between
+            .h5
+              | User Name: #{comment.user_display_name} (KEY:#{comment.user_name})
+            .h6.text-muted.align-self-lg-end
+              | Date:
+              time #{comment.created_at}
