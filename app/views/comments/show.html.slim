@@ -1,5 +1,37 @@
-h1 Comments#show
-p Find me in app/views/comments/show.html.slim
+- provide(:title,  "ID:"+"ここにID");
+.container
+  .card-block
+    .card.card-default.mb-3
+      .card-block.m-3
+        .d-flex
+          h3 ID:#{@comment.id}
+          h3.ml-3
+            | Parent's ID:
+            - if @comment.comment.present?
+              = link_to(comment_path(@comment.comment)) do
+                = @comment.comment.id
+        p.text-muted #{@comment.comment.body} 
+        p.h4 #{@comment.body}
+        .d-lg-flex.justify-content-between
+          h5
+            | User Name: #{@comment.user_display_name} (KEY:#{@comment.user_name})
+          h6.text-muted.align-self-lg-end Date: #{@comment.created_at}
+  h2 Children
+  .card-block
+      - @child_comments.each do |comment|
+        .card.card-default.mb-3
+          .card-block.m-3
+            .d-flex
+              h3
+                | ID:&nbsp;
+                = link_to(comment_path(comment)) do
+                  = comment.id
+            p.h4 #{comment.body}
+            .d-lg-flex.justify-content-between
+              h5
+                | User Name: #{comment.user_display_name} (KEY:#{comment.user_name})
+              h6.text-muted.align-self-lg-end Date: #{comment.created_at}
+
 
 = form_with(model: @new_comment, local: true) do |f|
   = f.label(:body)
@@ -10,32 +42,3 @@ p Find me in app/views/comments/show.html.slim
   = f.text_field(:user_display_name)
   = f.hidden_field(:comment_id)
   = f.submit
-
-ul
-  li
-    | id:
-    = link_to(comment_path(@comment)) do
-      = @comment.id
-  li body: #{@comment.body}
-  li user_display_name: #{@comment.user_display_name}
-  li user_name: #{@comment.user_name}
-  li created_at: #{@comment.created_at}
-  li
-    | parent:
-    - if @comment.comment.present?
-      = link_to(comment_path(@comment.comment)) do
-        = @comment.comment.id
-  li
-    | child-comments
-    ol
-      - @child_comments.each do |comment|
-        li
-          ul
-            li
-              | id:&nbsp;
-              = link_to(comment_path(comment)) do
-                = comment.id
-            li body: #{comment.body}
-            li user_display_name: #{comment.user_display_name}
-            li user_name: #{comment.user_name}
-            li created_at: #{comment.created_at}
