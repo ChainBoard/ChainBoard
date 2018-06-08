@@ -4,6 +4,9 @@ AllCops:
     - 'db/migrate/**/*'
     - 'db/schema.rb'
 
+Metrics/AbcSize:
+  Max: 25
+
 Metrics/LineLength:
   Max: 120
 
