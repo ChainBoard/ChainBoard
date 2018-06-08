@@ -42,15 +42,19 @@
   h2.mt-1 Make new Child!
 
   .card-block
-    .card.card-default.mb-3
+    .card.card-default
       .card-block.m-3
         .form-group
           = form_with(model: @new_comment, local: true) do |f|
             label for="bodyText"  Text
             = f.text_area(:body,id: :bodyText,class: "form-control",rows: "4")
-            label for="userName"  User Name
-            = f.text_field(:user_display_name,id: :userName,class: "form-control",placeholder: "Option")
-            label for="userKey"  KEY
-            = f.text_field(:user_name,id: :userName,class: "form-control",placeholder: "Option",type: "password")
-            button.btn.btn-primary type="submit" POST
-            /= f.hidden_field(:comment_id)
+            .form-row
+              .col-md
+                label for="userName"  User Name
+                = f.text_field(:user_display_name,id: :userName,class: "form-control",placeholder: "Option",type: "text")
+              .col-md
+                label for="userKey"  KEY
+                = f.text_field(:user_name,id: :userName,class: "form-control",placeholder: "Option",type: "password")
+            .d-flex.flex-column.align-items-stretch.mt-3
+              button.btn.btn-primary type="submit" POST
+            = f.hidden_field(:comment_id)
