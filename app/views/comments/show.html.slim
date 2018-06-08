@@ -39,7 +39,9 @@
     .card.card-default.mb-3
       .card-block.m-3
         = form_with(model: @new_comment, local: true) do |f|
-          = f.text_area(:body)
+          .form-group
+            label for="bodyText"  TEXT
+            = f.text_area(:body,id: :bodyText,class: "form-control",rows: "4")
           = f.label(:user_name)
           = f.text_field(:user_name)
           = f.label(:user_display_name)
