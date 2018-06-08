@@ -18,7 +18,7 @@ services:
       RAILS_DATABASE_HOST: "mariadb"
       RAILS_DATABASE_PASSWORD: "password"
       RAILS_DATABASE_USERNAME: "root"
-      RAILS_ROOT: "/var/www/app/"
+      RAILS_ROOT: "/var/www/app"
       RAILS_SOLR_HOST: "solr"
       RAILS_SOLR_PATH: "/solr/mycore"
       RAILS_TASKS: "assets:precompile db:create db:migrate db:seed sunspot:reindex"
@@ -26,7 +26,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - "./:/var/www/app/"
+      - "./:/var/www/app"
   solr:
     entrypoint: "docker-entrypoint.sh solr-precreate mycore"
     expose:

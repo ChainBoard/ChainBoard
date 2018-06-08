@@ -14,12 +14,12 @@ services:
   nginx:
     command: "/bin/sh -c \"envsubst '$$RAILS_ROOT' < /var/www/app/docker/nginx/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'\""
     environment:
-      RAILS_ROOT: "/var/www/app/"
+      RAILS_ROOT: "/var/www/app"
     image: "nginx"
     ports:
       - "80:80"
     volumes:
-      - "./:/var/www/app/"
+      - "./:/var/www/app"
   rails:
     build:
       args:
@@ -35,13 +35,13 @@ services:
       RAILS_DATABASE_PASSWORD: "cojtswbp_password"
       RAILS_DATABASE_USERNAME: "cojtswbp_user"
       RAILS_ENV: "production"
-      RAILS_ROOT: "/var/www/app/"
+      RAILS_ROOT: "/var/www/app"
       RAILS_SOLR_HOST: "solr"
       RAILS_SOLR_PATH: "/solr/mycore"
       RAILS_TASKS: "assets:precompile db:create db:migrate db:seed sunspot:reindex"
     image: "cojt-board-project-rails"
     volumes:
-      - "./:/var/www/app/"
+      - "./:/var/www/app"
   solr:
     entrypoint: "docker-entrypoint.sh solr-precreate mycore"
     expose:
