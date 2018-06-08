@@ -31,14 +31,18 @@
               h5
                 | User Name: #{comment.user_display_name} (KEY:#{comment.user_name})
               h6.text-muted.align-self-lg-end Date: #{comment.created_at}
+  h3 Make new Child!
 
 
-= form_with(model: @new_comment, local: true) do |f|
-  = f.label(:body)
-  = f.text_area(:body)
-  = f.label(:user_name)
-  = f.text_field(:user_name)
-  = f.label(:user_display_name)
-  = f.text_field(:user_display_name)
-  = f.hidden_field(:comment_id)
-  = f.submit
+  button.btn.btn-primary.ml-3 Comment
+  .card-block
+    .card.card-default.mb-3
+      .card-block.m-3
+        = form_with(model: @new_comment, local: true) do |f|
+          = f.text_area(:body)
+          = f.label(:user_name)
+          = f.text_field(:user_name)
+          = f.label(:user_display_name)
+          = f.text_field(:user_display_name)
+          = f.hidden_field(:comment_id)
+          = f.submit
