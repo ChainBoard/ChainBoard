@@ -10,11 +10,12 @@
             span.h3.ml-3
               | Parent's ID:
               - if comment.comment.present?
-                = link_to(comment_path(comment.comment)) do
-                  = comment.comment.id
+                = link_to(comment.comment.id,comment_path(comment.comment))
           p.text-muted.d-none.d-lg-block #{comment.comment.body}
           p.h4 #{comment.body}
           .d-lg-flex.justify-content-between
             .h5
               | User Name: #{comment.user_display_name} (KEY:#{comment.user_name})
-            .h6.text-muted.align-self-lg-end Date: <time> #{comment.created_at}</time>
+            .h6.text-muted.align-self-lg-end
+              | Date:
+              time #{comment.created_at}
