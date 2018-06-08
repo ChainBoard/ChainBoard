@@ -1,20 +1,17 @@
-h1 Comments#index
-p Find me in app/views/comments/index.html.slim
-
-ol
-  - @comments.each do |comment|
-    li
-      ul
-        li
-          | id:&nbsp;
-          = link_to(comment_path(comment)) do
-            = comment.id
-        li body: #{comment.body}
-        li user_display_name: #{comment.user_display_name}
-        li user_name: #{comment.user_name}
-        li created_at: #{comment.created_at}
-        li
-          | parent:
-          - if comment.comment.present?
-            = link_to(comment_path(comment.comment)) do
-              = comment.comment.id
+.container
+  .card-block
+    - @comments.each do |comment|
+      .card.card-default.
+        .card-block
+          h3
+            | ID:&nbsp;
+            = link_to(comment_path(comment)) do
+              = comment.id
+            | Parent's ID:
+            - if comment.comment.present?
+              = link_to(comment_path(comment.comment)) do
+                = comment.comment.id
+          h3
+            | User Name: #{comment.user_display_name} (🔑:#{comment.user_name})
+          p #{comment.body}
+          h5.text-muted Date: #{comment.created_at}
