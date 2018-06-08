@@ -7,11 +7,12 @@
             span.h3
               | ID:
               = link_to(comment.id, comment_path(comment))
-            span.h3.ml-3
-              | Parent's ID:
-              - if comment.comment.present?
-                = link_to(comment.comment.id,comment_path(comment.comment))
-          p.text-muted.d-none.d-md-block #{comment.comment.body}
+            - if comment.comment.present?
+              span.h3.ml-3
+                | Parent's ID:
+                = link_to(comment.comment.id, comment_path(comment.comment))
+          - if comment.comment.present?
+            p.text-muted.d-none.d-md-block #{comment.comment.body}
           p.h4 #{comment.body}
           .d-lg-flex.justify-content-between
             .h5
