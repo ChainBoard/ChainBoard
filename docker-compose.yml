@@ -18,6 +18,7 @@ services:
       RAILS_DATABASE_HOST: "mariadb"
       RAILS_DATABASE_PASSWORD: "password"
       RAILS_DATABASE_USERNAME: "root"
+      RAILS_REDIS_HOST: "redis"
       RAILS_ROOT: "/var/www/app"
       RAILS_SOLR_HOST: "solr"
       RAILS_SOLR_PATH: "/solr/mycore"
