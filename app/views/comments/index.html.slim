@@ -11,7 +11,7 @@
               | Parent's ID:
               - if comment.comment.present?
                 = link_to(comment.comment.id,comment_path(comment.comment))
-          p.text-muted.d-none.d-lg-block #{comment.comment.body}
+          p.text-muted.d-none.d-md-block #{comment.comment.body}
           p.h4 #{comment.body}
           .d-lg-flex.justify-content-between
             .h5
