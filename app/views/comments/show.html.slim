@@ -48,11 +48,11 @@
           = form_with(model: @new_comment, local: true) do |f|
             label for="bodyText"  Text
             = f.text_area(:body,id: :bodyText,class: "form-control",rows: "4")
-            .form-row
-              .col-md
+            .form-row.mt-1
+              .col-md.mt-1
                 label for="userName"  User Name
                 = f.text_field(:user_display_name,id: :userName,class: "form-control",placeholder: "Option",type: "text")
-              .col-md
+              .col-md.mt-1
                 label for="userKey"  KEY
                 = f.text_field(:user_name,id: :userName,class: "form-control",placeholder: "Option",type: "password")
             .d-flex.flex-column.align-items-stretch.mt-3
