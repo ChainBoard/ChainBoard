@@ -45,11 +45,8 @@
             label for="bodyText"  Text
             = f.text_area(:body,id: :bodyText,class: "form-control",rows: "4")
             label for="userName"  User Name
-            = f.text_field(:user_display_name,id: :userName,class: "form-control")
+            = f.text_field(:user_display_name,id: :userName,class: "form-control",placeholder: "Option")
             label for="userKey"  KEY
-            = f.text_field(:user_name,id: :userName,class: "form-control")
-            
-            
-            
-            = f.hidden_field(:comment_id)
+            = f.text_field(:user_name,id: :userName,class: "form-control",placeholder: "Option",type: "password")
             button.btn.btn-primary type="submit" POST
+            /= f.hidden_field(:comment_id)
