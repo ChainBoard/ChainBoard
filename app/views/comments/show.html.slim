@@ -1,4 +1,4 @@
-- provide(:title,  "ID:"+@comment.id.to_s);
+- provide(:title, 'ID:' + @comment.id.to_s)
 
 .container
   .card-block
@@ -11,13 +11,13 @@
               | Parent's ID:
               = link_to(@comment.comment.id, comment_path(@comment.comment))
         - if @comment.comment.present?
-          p.text-muted #{@comment.comment.body} 
+          p.text-muted #{@comment.comment.body}
         p.h4 #{@comment.body}
         .d-lg-flex.justify-content-between
           .h5
             | User Name: #{@comment.user_display_name} (KEY:#{@comment.user_name})
           .h6.text-muted.align-self-lg-end
-            | Date: 
+            | Date:
             time #{@comment.created_at}
 
   h2 Children
@@ -38,7 +38,7 @@
                 h6.text-muted.align-self-lg-end Date: #{comment.created_at}
   - else
     span.h5 NO CHILDREN!!
-  
+
   h2.mt-1 Make new Child!
 
   .card-block
@@ -47,14 +47,16 @@
         .form-group
           = form_with(model: @new_comment, local: true) do |f|
             label for="bodyText"  Text
-            = f.text_area(:body,id: :bodyText,class: "form-control",rows: "4")
+            = f.text_area(:body, id: :bodyText, class: 'form-control', rows: '4')
             .form-row.mt-1
               .col-md.mt-1
                 label for="userName"  User Name
-                = f.text_field(:user_display_name,id: :userName,class: "form-control",placeholder: "Option",type: "text")
+                = f.text_field(:user_display_name,
+                      id: :userName, class: 'form-control', placeholder: 'Option', type: 'text')
               .col-md.mt-1
                 label for="userKey"  KEY
-                = f.text_field(:user_name,id: :userName,class: "form-control",placeholder: "Option",type: "password")
+                = f.text_field(:user_name,
+                      id: :userName, class: 'form-control', placeholder: 'Option', type: 'password')
             .d-flex.flex-column.align-items-stretch.mt-3
               button.btn.btn-primary type="submit" POST
             = f.hidden_field(:comment_id)

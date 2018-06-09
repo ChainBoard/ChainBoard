@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def full_title(page_title)
-    base_title = "CojtBoardProject" #アプリ名
+    base_title = 'CojtBoardProject' # アプリ名
     if page_title.empty?
       base_title
     else
