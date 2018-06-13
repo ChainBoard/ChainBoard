@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
       @child_comments = Comment.where(comment: @comment)
       @new_comment = Comment.new(comment: @comment)
     else
-      redirect_to root_path
+      redirect_to root_path, alert: 'Comment not found.'
     end
   end
 
