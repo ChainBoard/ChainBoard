@@ -20,7 +20,7 @@ class Comment < ApplicationRecord
 
   def crypt_user_name
     self.user_name = if user_name.present?
-                       user_name.crypt(user_name).slice(0, 10)
+                       user_name.crypt(user_name).slice(2, 10)
                      else
                        'Anonymous'
                      end
