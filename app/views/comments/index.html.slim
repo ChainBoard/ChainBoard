@@ -17,9 +17,9 @@
           .d-lg-flex.justify-content-between
             .h5
               | User Name: 
-              a href="/?user_display_name=#{comment.user_display_name}" #{comment.user_display_name} 
+              = link_to(comment.user_display_name, root_path(user_name: comment.user_display_name))
               | (KEY:
-              a href="/?user_name=#{comment.user_name}" #{comment.user_name}
+              = link_to(comment.user_name, root_path(user_name: comment.user_name))
               | )
             .h6.text-muted.align-self-lg-end
               | Date:
