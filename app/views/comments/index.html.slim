@@ -16,7 +16,11 @@
           p.h4 #{comment.body}
           .d-lg-flex.justify-content-between
             .h5
-              | User Name: #{comment.user_display_name} (KEY:#{comment.user_name})
+              | User Name: 
+              a href="/?user_display_name=#{comment.user_display_name}" #{comment.user_display_name} 
+              | (KEY:
+              a href="/?user_name=#{comment.user_name}" #{comment.user_name}
+              | )
             .h6.text-muted.align-self-lg-end
               | Date:
               time #{comment.created_at}
