@@ -23,4 +23,7 @@ html
               a.nav-item.nav-link href="#" Some
               a.nav-item.nav-link href="#" Thing
 
+    - if flash[:alert]
+      = flash[:alert]
+
     = yield
