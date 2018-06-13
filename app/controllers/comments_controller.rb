@@ -39,9 +39,9 @@ class CommentsController < ApplicationController
 
   def search_comment(query)
     Comment.search(include: :comment) do
-      fulltext query[:body] if query[:body]
-      with(:user_display_name, query[:user_display_name]) if query[:user_display_name]
-      with(:user_name, query[:user_name]) if query[:user_name]
+      fulltext query[:body] if query[:body].present?
+      with(:user_display_name, query[:user_display_name]) if query[:user_display_name].present?
+      with(:user_name, query[:user_name]) if query[:user_name].present?
       order_by(:id, :desc)
     end
   end
