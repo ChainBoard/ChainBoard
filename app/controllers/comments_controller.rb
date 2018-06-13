@@ -2,12 +2,9 @@
 
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.search(include: :comment) do
-      fulltext params[:body] if params[:body].present?
-      with(:user_display_name, params[:user_display_name]) if params[:user_display_name].present?
-      with(:user_name, params[:user_name]) if params[:user_name].present?
-      order_by(:id, :desc)
-    end.results
+    @search_params = search_params
+    @comments = search_comment(@search_params).results
+    flash.now[:alert] = 'Comment not found.' if @comments.empty?
   end
 
   def show
@@ -38,5 +35,20 @@ class CommentsController < ApplicationController
                                     :comment_id,
                                     :user_display_name,
                                     :user_name)
+  end
+
+  def search_comment(query)
+    Comment.search(include: :comment) do
+      fulltext query[:body] if query[:body]
+      with(:user_display_name, query[:user_display_name]) if query[:user_display_name]
+      with(:user_name, query[:user_name]) if query[:user_name]
+      order_by(:id, :desc)
+    end
+  end
+
+  def search_params
+    params.permit(:body,
+                  :user_display_name,
+                  :user_name)
   end
 end
