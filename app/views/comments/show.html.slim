@@ -15,7 +15,7 @@
         p.h4 #{@comment.body}
         .d-lg-flex.justify-content-between
           .h5
-            | User Name: 
+            | User Name:
             = link_to(@comment.user_display_name, root_path(user_display_name: @comment.user_display_name))
             | (KEY:
             = link_to(@comment.user_name, root_path(user_name: @comment.user_name))
@@ -38,7 +38,7 @@
               p.h4 #{comment.body}
               .d-lg-flex.justify-content-between
                 .h5
-                  | User Name: 
+                  | User Name:
                   = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
                   | (KEY:
                   = link_to(comment.user_name, root_path(user_name: comment.user_name))
