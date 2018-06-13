@@ -11,15 +11,16 @@ html
       nav.navbar.navbar-dark.bg-dark.navbar-expand-md.fixed-top
         .container
           = link_to('CojtBoardProject', root_path, class: 'navbar-brand')
-          button.navbar-toggler aria-controls="Navbar" aria-expanded="false" aria-label="Toggle Navigation" data-target="#Navbar" data-toggle="collapse" type="button" 
+          button.navbar-toggler (aria-controls="Navbar" aria-expanded="false" aria-label="Toggle Navigation"
+                data-target="#Navbar" data-toggle="collapse" type="button")
             span.navbar-toggler-icon
           #Navbar.collapse.navbar-collapse
             .mx-auto
-              form.form-inline.mt-2.mt-md-1
-                input.form-control.mr-sm-2 aria-label="" placeholder="" type="search"
-                button.btn.btn-light.my-2.my-sm-0 type="submit" Search
+              form.form-inline.mt-2.mt-md-1 action="/" method="get"
+                input.form-control.mr-sm-2 aria-label="Search form" type="search" name="body"
+                button.btn.btn-light.my-2.my-sm-0 aria-label="Search submit button" type="submit" Search
             .navbar-nav
-                a.nav-item.nav-link href="#" Some
-                a.nav-item.nav-link href="#" Thing
+              a.nav-item.nav-link href="#" Some
+              a.nav-item.nav-link href="#" Thing
 
     = yield
