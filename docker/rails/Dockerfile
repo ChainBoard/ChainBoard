@@ -5,11 +5,11 @@ ARG GEMFILE_LOCK
 
 ENV DOCKERIZE_HOSTS="" \
     DOCKERIZE_VERSION="v0.6.1" \
-    RAILS_ROOT="/var/www/app/" \
+    RAILS_ROOT="/var/www/app" \
     RAILS_TASKS="assets:precompile db:create db:migrate db:seed"
 
 COPY ["$GEMFILE", \
-    "$GEMFILE_LOCK", "$RAILS_ROOT"]
+    "$GEMFILE_LOCK", "$RAILS_ROOT/"]
 
 WORKDIR $RAILS_ROOT
 
