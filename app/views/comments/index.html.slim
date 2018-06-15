@@ -12,7 +12,7 @@
                 | Parent's ID:
                 = link_to(comment.comment.id, comment_path(comment.comment))
           - if comment.comment.present?
-            p.text-muted.d-none.d-md-block 
+            p.text-muted.d-none.d-md-block
               - comment.comment.body.split(/\r\n/).each do |str|
                 = str
                 br
