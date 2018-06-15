@@ -14,10 +14,11 @@ services:
       context: "./"
       dockerfile: "./docker/rails/Dockerfile"
     environment:
-      DOCKERIZE_HOSTS: "mariadb:3306 solr:8983"
+      DOCKERIZE_HOSTS: "mariadb:3306 redis:6379 solr:8983"
       RAILS_DATABASE_HOST: "mariadb"
       RAILS_DATABASE_PASSWORD: "password"
       RAILS_DATABASE_USERNAME: "root"
+      RAILS_REDIS_HOST: "redis"
       RAILS_ROOT: "/var/www/app"
       RAILS_SOLR_HOST: "solr"
       RAILS_SOLR_PATH: "/solr/mycore"
@@ -27,6 +28,10 @@ services:
       - "3000:3000"
     volumes:
       - "./:/var/www/app"
+  redis:
+    expose:
+      - "6379"
+    image: "redis"
   solr:
     command: "solr-precreate mycore /var/lib/solr/config"
     expose:

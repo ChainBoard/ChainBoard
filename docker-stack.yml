@@ -29,12 +29,13 @@ services:
       dockerfile: "./docker/rails/Dockerfile"
     command: "puma -w 4"
     environment:
-      DOCKERIZE_HOSTS: "mariadb:3306 solr:8983"
+      DOCKERIZE_HOSTS: "mariadb:3306 redis:6379 solr:8983"
       RAILS_DATABASE: "cojtswbp_database"
       RAILS_DATABASE_HOST: "mariadb"
       RAILS_DATABASE_PASSWORD: "cojtswbp_password"
       RAILS_DATABASE_USERNAME: "cojtswbp_user"
       RAILS_ENV: "production"
+      RAILS_REDIS_HOST: "redis"
       RAILS_ROOT: "/var/www/app"
       RAILS_SOLR_HOST: "solr"
       RAILS_SOLR_PATH: "/solr/mycore"
@@ -42,6 +43,10 @@ services:
     image: "cojt-board-project-rails"
     volumes:
       - "./:/var/www/app"
+  redis:
+    expose:
+      - "6379"
+    image: "redis"
   solr:
     command: "solr-precreate mycore /var/lib/solr/config"
     expose:

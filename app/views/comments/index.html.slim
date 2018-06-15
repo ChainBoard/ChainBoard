@@ -7,13 +7,13 @@
             span.h3
               | ID:
               = link_to(comment.id, comment_path(comment))
-            - if comment.comment.present?
+            - if comment.fetch_comment.present?
               span.h3.ml-3
                 | Parent's ID:
-                = link_to(comment.comment.id, comment_path(comment.comment))
-          - if comment.comment.present?
+                = link_to(comment.fetch_comment.id, comment_path(comment.fetch_comment))
+          - if comment.fetch_comment.present?
             p.text-muted.d-none.d-md-block
-              - comment.comment.body.split(/\r\n/).each do |str|
+              - comment.fetch_comment.body.split(/\r\n/).each do |str|
                 = str
                 br
           p.h4

@@ -6,13 +6,13 @@
       .card-block.m-3
         .d-flex
           span.h3 ID:#{@comment.id}
-          - if @comment.comment.present?
+          - if @comment.fetch_comment.present?
             span.h3.ml-3
               | Parent's ID:
-              = link_to(@comment.comment.id, comment_path(@comment.comment))
-        - if @comment.comment.present?
+              = link_to(@comment.fetch_comment.id, comment_path(@comment.fetch_comment))
+        - if @comment.fetch_comment.present?
           p.text-muted
-            - @comment.comment.body.split(/\r\n/).each do |str|
+            - @comment.fetch_comment.body.split(/\r\n/).each do |str|
               = str
               br
         p.h4
@@ -33,9 +33,9 @@
             time #{@comment.created_at}
 
   h2 Children
-  - if @child_comments.present?
+  - if @comment.fetch_comments.present?
     .card-block
-        - @child_comments.each do |comment|
+        - @comment.fetch_comments.each do |comment|
           .card.card-default.mb-3
             .card-block.m-3
               .d-flex

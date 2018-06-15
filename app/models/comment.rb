@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  include IdentityCache
+
   before_create :crypt_user_name
 
   belongs_to :comment, optional: true
+  cache_belongs_to :comment
+
+  has_many :comments
+  cache_has_many :comments
 
   validates :body, length: { maximum: 280 }, presence: true
   validates :user_display_name, length: { maximum: 50 }
