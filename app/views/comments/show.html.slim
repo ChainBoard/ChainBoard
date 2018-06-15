@@ -11,8 +11,14 @@
               | Parent's ID:
               = link_to(@comment.comment.id, comment_path(@comment.comment))
         - if @comment.comment.present?
-          p.text-muted #{@comment.comment.body}
-        p.h4 #{@comment.body}
+          p.text-muted
+            - @comment.comment.body.split(/\r\n/).each do |str|
+              = str
+              br
+        p.h4
+          - @comment.body.split(/\r\n/).each do |str|
+            = str
+            br
         .d-lg-flex.justify-content-between
           .h5
             | User Name:
@@ -35,7 +41,10 @@
                   | ID:
                   = link_to(comment_path(comment)) do
                     = comment.id
-              p.h4 #{comment.body}
+              p.h4
+                - comment.body.split(/\r\n/).each do |str|
+                  = str
+                  br
               .d-lg-flex.justify-content-between
                 .h5
                   | User Name:
@@ -55,7 +64,7 @@
         .form-group
           = form_with(model: @new_comment, local: true) do |f|
             label for="bodyText"  Text
-            = f.text_area(:body, id: :bodyText, class: 'form-control', rows: '4')
+            = f.text_area(:body, id: :bodyText, class: 'form-control', rows: '4', required: true)
             .form-row.mt-1
               .col-md.mt-1
                 label for="userName"  User Name
