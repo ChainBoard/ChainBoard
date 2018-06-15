@@ -30,6 +30,9 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 # Use Sunspot for apache solr
 gem 'sunspot_rails'
+# Use Identity cache for ActiveModel cache
+gem 'cityhash'
+gem 'identity_cache'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
