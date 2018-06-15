@@ -6,12 +6,12 @@
       .card-block.m-3
         .d-flex
           span.h3 ID:#{@comment.id}
-          - if @comment.comment.present?
+          - if @comment.fetch_comment.present?
             span.h3.ml-3
               | Parent's ID:
-              = link_to(@comment.comment.id, comment_path(@comment.comment))
-        - if @comment.comment.present?
-          p.text-muted #{@comment.comment.body}
+              = link_to(@comment.fetch_comment.id, comment_path(@comment.fetch_comment))
+        - if @comment.fetch_comment.present?
+          p.text-muted #{@comment.fetch_comment.body}
         p.h4 #{@comment.body}
         .d-lg-flex.justify-content-between
           .h5
@@ -25,25 +25,25 @@
             time #{@comment.created_at}
 
   h2 Children
-  - if @child_comments.present?
+  - if @comment.fetch_comments.present?
     .card-block
-        - @child_comments.each do |comment|
-          .card.card-default.mb-3
-            .card-block.m-3
-              .d-flex
-                span.h3
-                  | ID:
-                  = link_to(comment_path(comment)) do
-                    = comment.id
-              p.h4 #{comment.body}
-              .d-lg-flex.justify-content-between
-                .h5
-                  | User Name:
-                  = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
-                  | (KEY:
-                  = link_to(comment.user_name, root_path(user_name: comment.user_name))
-                  | )
-                .h6.text-muted.align-self-lg-end Date: #{comment.created_at}
+      - @comment.fetch_comments.each do |comment|
+        .card.card-default.mb-3
+          .card-block.m-3
+            .d-flex
+              span.h3
+                | ID:
+                = link_to(comment_path(comment)) do
+                  = comment.id
+            p.h4 #{comment.body}
+            .d-lg-flex.justify-content-between
+              .h5
+                | User Name:
+                = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
+                | (KEY:
+                = link_to(comment.user_name, root_path(user_name: comment.user_name))
+                | )
+              .h6.text-muted.align-self-lg-end Date: #{comment.created_at}
   - else
     span.h5 NO CHILDREN!!
 
