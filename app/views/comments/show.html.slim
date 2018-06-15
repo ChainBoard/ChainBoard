@@ -11,15 +11,23 @@
               | Parent's ID:
               = link_to(@comment.fetch_comment.id, comment_path(@comment.fetch_comment))
         - if @comment.fetch_comment.present?
-          p.text-muted #{@comment.fetch_comment.body}
-        p.h4 #{@comment.body}
+          p.text-muted
+            - @comment.fetch_comment.body.split(/\r\n/).each do |str|
+              = str
+              br
+        p.h4
+          - @comment.body.split(/\r\n/).each do |str|
+            = str
+            br
         .d-lg-flex.justify-content-between
-          .h5
-            | User Name:
-            = link_to(@comment.user_display_name, root_path(user_display_name: @comment.user_display_name))
-            | (KEY:
-            = link_to(@comment.user_name, root_path(user_name: @comment.user_name))
-            | )
+          .d-md-flex.flex-row
+            .h5
+              | User Name:
+              = link_to(@comment.user_display_name, root_path(user_display_name: @comment.user_display_name))
+            .h5
+              | (KEY:
+              = link_to(@comment.user_name, root_path(user_name: @comment.user_name))
+              | )
           .h6.text-muted.align-self-lg-end
             | Date:
             time #{@comment.created_at}
@@ -27,23 +35,28 @@
   h2 Children
   - if @comment.fetch_comments.present?
     .card-block
-      - @comment.fetch_comments.each do |comment|
-        .card.card-default.mb-3
-          .card-block.m-3
-            .d-flex
-              span.h3
-                | ID:
-                = link_to(comment_path(comment)) do
-                  = comment.id
-            p.h4 #{comment.body}
-            .d-lg-flex.justify-content-between
-              .h5
-                | User Name:
-                = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
-                | (KEY:
-                = link_to(comment.user_name, root_path(user_name: comment.user_name))
-                | )
-              .h6.text-muted.align-self-lg-end Date: #{comment.created_at}
+        - @comment.fetch_comments.each do |comment|
+          .card.card-default.mb-3
+            .card-block.m-3
+              .d-flex
+                span.h3
+                  | ID:
+                  = link_to(comment_path(comment)) do
+                    = comment.id
+              p.h4
+                - comment.body.split(/\r\n/).each do |str|
+                  = str
+                  br
+              .d-lg-flex.justify-content-between
+                .d-md-flex.flex-row
+                  .h5
+                    | User Name:
+                    = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
+                  .h5
+                    | (KEY:
+                    = link_to(comment.user_name, root_path(user_name: comment.user_name))
+                    | )
+                .h6.text-muted.align-self-lg-end Date: #{comment.created_at}
   - else
     span.h5 NO CHILDREN!!
 
@@ -55,7 +68,7 @@
         .form-group
           = form_with(model: @new_comment, local: true) do |f|
             label for="bodyText"  Text
-            = f.text_area(:body, id: :bodyText, class: 'form-control', rows: '4')
+            = f.text_area(:body, id: :bodyText, class: 'form-control', rows: '4', required: true)
             .form-row.mt-1
               .col-md.mt-1
                 label for="userName"  User Name
