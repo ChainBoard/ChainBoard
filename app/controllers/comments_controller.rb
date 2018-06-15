@@ -3,17 +3,16 @@
 class CommentsController < ApplicationController
   def index
     @search_params = index_params
-    @comments = Comment.fetch_multi(search_comment_hit_ids(@search_params), includes: [:comment, :comments])
+    @comments = Comment.fetch_multi(search_comment_hit_ids(@search_params), includes: %i[comment comments])
+
     flash.now[:alert] = 'Comment not found.' if @comments.empty?
   end
 
   def show
-    @comment = Comment.fetch_by_id(params[:id], includes: [:comment, :comments])
+    @comment = Comment.fetch_by_id(params[:id], includes: %i[comment comments])
     @new_comment = Comment.new(comment: @comment)
 
-    unless @comment
-      redirect_to root_path, alert: 'Comment not found.'
-    end
+    redirect_to root_path, alert: 'Comment not found.' unless @comment
   end
 
   def create
