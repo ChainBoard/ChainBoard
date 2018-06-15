@@ -15,12 +15,14 @@
             p.text-muted.d-none.d-md-block #{comment.comment.body}
           p.h4 #{comment.body}
           .d-lg-flex.justify-content-between
-            .h5
-              | User Name:
-              = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
-              | (KEY:
-              = link_to(comment.user_name, root_path(user_name: comment.user_name))
-              | )
+            .d-md-flex.flex-row
+              .h5
+                | User Name:
+                = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
+              .h5
+                | (KEY:
+                = link_to(comment.user_name, root_path(user_name: comment.user_name))
+                | )
             .h6.text-muted.align-self-lg-end
               | Date:
               time #{comment.created_at}
