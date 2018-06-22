@@ -13,13 +13,9 @@
                 = link_to(comment.fetch_comment.id, comment_path(comment.fetch_comment))
           - if comment.fetch_comment.present?
             p.text-muted.d-none.d-md-block
-              - comment.fetch_comment.body.split(/\r\n/).each do |str|
-                = str
-                br
+              = comment_body_format(comment.fetch_comment.body)
           p.h4
-            - comment.body.split(/\r\n/).each do |str|
-              = str
-              br
+            = comment_body_format(comment.body)
           .d-lg-flex.justify-content-between
             .d-md-flex.flex-row
               .h5
