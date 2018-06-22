@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def full_title(page_title)
+  def page_title(page_title)
     base_title = 'CojtBoardProject'
     if page_title.empty?
       base_title
