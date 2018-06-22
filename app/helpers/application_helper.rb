@@ -11,16 +11,8 @@ module ApplicationHelper
   end
 
   def comment_body_format(body)
-    body_lines = body.split(/\r\n/).map.with_index do |line, index|
-      if index.zero?
-        line
-      else
-        tag.br + line
-      end
-    end
-
-    body_lines.inject(raw('')) do |res, line|
-      res + line
-    end
+    raw(html_escape(body)
+            .gsub(/\r\n/, tag.br)
+            .gsub(/#([^\s]+)/, tag.a('#\1', href: root_path(body: '\1').gsub(/%5C/, '%23\\'))))
   end
 end
