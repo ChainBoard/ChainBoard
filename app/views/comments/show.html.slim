@@ -68,16 +68,16 @@
         .form-group
           = form_with(model: @new_comment, local: true) do |f|
             label for="bodyText"  Text
-            = f.text_area(:body, id: :bodyText, class: 'form-control', rows: '4', required: true)
+            = f.text_area(:body, id: :bodyText, class: 'form-control', rows: '4', required: true, maxlength: '280')
             .form-row.mt-1
               .col-md.mt-1
                 label for="userName"  User Name
                 = f.text_field(:user_display_name,
-                      id: :userDisplayName, class: 'form-control', placeholder: 'Option', type: 'text')
+                      id: :userDisplayName, class: 'form-control', placeholder: 'Option', type: 'text', maxlength: '50')
               .col-md.mt-1
                 label for="userKey"  KEY
                 = f.text_field(:user_name,
-                      id: :userName, class: 'form-control', placeholder: 'Option', type: 'password')
+                      id: :userName, class: 'form-control', placeholder: 'Option', type: 'password', maxlength: '16')
             .d-flex.flex-column.align-items-stretch.mt-3
               button.btn.btn-primary type="submit" POST
             = f.hidden_field(:comment_id)
