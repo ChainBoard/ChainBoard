@@ -8,7 +8,7 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
-    title = full_title(yield(:title))
+    title = page_title(yield(:title))
 
   body
     .bs-component
