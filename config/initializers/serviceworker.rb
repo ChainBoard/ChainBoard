@@ -4,8 +4,9 @@ Rails.application.configure do
     # match "/serviceworker.js"
     # match "/manifest.json"
     match "/serviceworker.js" => "home/serviceworker.js"
-    match "/*pages/serviceworker.js" => "home/serviceworker.js"
-    match "/*pages/manifest.json" => "home/manifest.json"
+    match "/manifest.js" => "home/manifest.js"
+    #match "/*pages/serviceworker.js" => "home/serviceworker.js"
+    #match "/*pages/manifest.json" => "home/manifest.json"
     
     # Examples
     #
