@@ -11,7 +11,7 @@ var Query = function(query, callback) {
 var QueryUI = function(query, callback) {
     var withDefaultStyle = function(obj) {
         return Object.assign({
-            color: "red"
+            color: "#000000"
         }, obj);
     };
 
@@ -113,6 +113,7 @@ var Renderer = function (elt) {
             });
             //that._drawVignette()
         },
+        /*
         _drawVignette: function () {
             var w = canvas.width;
             var h = canvas.height;
@@ -140,7 +141,7 @@ var Renderer = function (elt) {
             // bot
             ctx.fillStyle = _vignette.bot;
             ctx.fillRect(0, h - r, w, r)
-        },
+        },*/
         switchMode: function (e) {
             if (e.mode === 'hidden') {
                 dom.stop(true).fadeTo(e.dt, 0, function () {
