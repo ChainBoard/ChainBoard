@@ -4,6 +4,7 @@ class Comment < ApplicationRecord
   include IdentityCache
 
   before_create :crypt_user_name
+  before_create :set_default_user_display_name
 
   belongs_to :comment, optional: true
   cache_belongs_to :comment
@@ -30,5 +31,9 @@ class Comment < ApplicationRecord
                      else
                        'Anonymous'
                      end
+  end
+
+  def set_default_user_display_name
+    self.user_display_name = 'Anonymous' if user_display_name.blank?
   end
 end
