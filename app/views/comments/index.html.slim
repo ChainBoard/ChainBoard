@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 canvas#comment-canvas
 
 script[src="/static/js/arbor.js"]
@@ -286,3 +287,35 @@ javascript:
             sys.graft(ui);
         });
     });
+=======
+.container
+  .card-block
+    - @comments.each do |comment|
+      .card.card-default.mb-3
+        .card-block.m-3
+          .d-flex
+            span.h3
+              | ID:
+              = link_to(comment.id, comment_path(comment))
+            - if comment.fetch_comment.present?
+              span.h3.ml-3
+                | Parent's ID:
+                = link_to(comment.fetch_comment.id, comment_path(comment.fetch_comment))
+          - if comment.fetch_comment.present?
+            p.text-muted.d-none.d-md-block
+              = comment_body_format(comment.fetch_comment.body)
+          p.h4
+            = comment_body_format(comment.body)
+          .d-lg-flex.justify-content-between
+            .d-md-flex.flex-row
+              .h5
+                | User Name:
+                = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
+              .h5
+                | (KEY:
+                = link_to(comment.user_name, root_path(user_name: comment.user_name))
+                | )
+            .h6.text-muted.align-self-lg-end
+              | Date:
+              time #{comment.created_at}
+>>>>>>> parent of 718e81f... remove unused endpoint
