@@ -1,4 +1,5 @@
-canvas#comment-canvas
+.collapse.jumbotron#map
+  canvas#comment-canvas
 
 script[src="/static/js/arbor.js"]
 script[src="/static/js/arbor-tween.js"]
@@ -118,7 +119,7 @@ javascript:
                         size: 12
                     });
                 });
-                that._drawVignette()
+                //that._drawVignette()
             },
             _drawVignette: function () {
                 var w = canvas.width;
@@ -286,6 +287,10 @@ javascript:
             sys.graft(ui);
         });
     });
+
+.d-flex.justify-content-center
+  button.btn.btn-info type="button" data-toggle="collapse" data-target="#map" 🌏(Beta)
+
 .container
   .card-block
     - @comments.each do |comment|
