@@ -8,6 +8,7 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
+    link rel="manifest" href="/manifest.json"
     title = page_title(yield(:title))
 
   body
