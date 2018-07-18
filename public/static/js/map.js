@@ -11,7 +11,7 @@ var Query = function(query, callback) {
 var QueryUI = function(query, callback) {
     var withDefaultStyle = function(obj) {
         return Object.assign({
-            color: "#000000"
+            color: "#324615" //Node Color
         }, obj);
     };
 
@@ -95,7 +95,7 @@ var Renderer = function (elt) {
             gfx.clear();
             sys.eachEdge(function (edge, p1, p2) {
                 gfx.line(p1, p2, {
-                    stroke: "#b2b19d",
+                    stroke: "#808C6D",//Edge Color
                     width: 2
                 });
             });
@@ -111,37 +111,7 @@ var Renderer = function (elt) {
                     size: 12
                 });
             });
-            //that._drawVignette()
         },
-        /*
-        _drawVignette: function () {
-            var w = canvas.width;
-            var h = canvas.height;
-            var r = 20;
-
-            if (!_vignette) {
-                var top = ctx.createLinearGradient(0, 0, 0, r);
-                top.addColorStop(0, "#e0e0e0");
-                top.addColorStop(.7, "rgba(255,255,255,0)");
-
-                var bot = ctx.createLinearGradient(0, h - r, 0, h);
-                bot.addColorStop(0, "rgba(255,255,255,0)");
-                bot.addColorStop(1, "white");
-
-                _vignette = {
-                    top: top,
-                    bot: bot
-                };
-            }
-
-            // top
-            ctx.fillStyle = _vignette.top;
-            ctx.fillRect(0, 0, w, r);
-
-            // bot
-            ctx.fillStyle = _vignette.bot;
-            ctx.fillRect(0, h - r, w, r)
-        },*/
         switchMode: function (e) {
             if (e.mode === 'hidden') {
                 dom.stop(true).fadeTo(e.dt, 0, function () {
