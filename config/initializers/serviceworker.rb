@@ -8,8 +8,6 @@ Rails.application.configure do
     #match "/*/serviceworker.js" => "assets/serviceworker.js"
     #match "/*/manifest.json" => "assets/manifest.json"
     
-
-
     # Examples
     #
     # map to a named asset explicitly
