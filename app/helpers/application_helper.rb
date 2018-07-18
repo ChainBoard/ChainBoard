@@ -2,7 +2,7 @@
 
 module ApplicationHelper
   def page_title(page_title)
-    base_title = 'CojtBoardProject'
+    base_title = 'ChainBoard'
     if page_title.empty?
       base_title
     else
