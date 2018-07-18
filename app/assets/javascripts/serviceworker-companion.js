@@ -4,6 +4,6 @@ if (navigator.serviceWorker) {
       console.log('[Companion]', 'Service worker registered!');
     }).catch(function(err) {
       // 登録失敗 :(
-      console.log('ServiceWorker registration failed: ', err);
+      console.log('ServiceWorker registration failed (but companion is called): ', err);
     });
 }
