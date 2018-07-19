@@ -3,10 +3,15 @@ services:
   mariadb:
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
     environment:
-      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "cojtswbp_database"
+      MYSQL_PASSWORD: "cojtswbp_password"
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: "cojtswbp_user"
     expose:
       - "3306"
     image: "mariadb"
+    volumes:
+      - "./docker/mariadb/data:/var/lib/mysql"
   rails:
     build:
       args:
@@ -14,11 +19,14 @@ services:
         GEMFILE_LOCK: "Gemfile.lock"
       context: "./"
       dockerfile: "./docker/rails/Dockerfile"
+    command: "puma -w 4"
     environment:
       DOCKERIZE_HOSTS: "mariadb:3306 redis:6379 solr:8983"
+      RAILS_DATABASE: "cojtswbp_database"
       RAILS_DATABASE_HOST: "mariadb"
-      RAILS_DATABASE_PASSWORD: "password"
-      RAILS_DATABASE_USERNAME: "root"
+      RAILS_DATABASE_PASSWORD: "cojtswbp_password"
+      RAILS_DATABASE_USERNAME: "cojtswbp_user"
+      RAILS_ENV: "production"
       RAILS_REDIS_HOST: "redis"
       RAILS_ROOT: "/var/www/app"
       RAILS_SOLR_HOST: "solr"
@@ -26,7 +34,7 @@ services:
       RAILS_TASKS: "assets:precompile db:create db:migrate db:seed sunspot:reindex"
     image: "cojt-board-project-rails"
     ports:
-      - "3000:3000"
+      - "4000:3000"
     volumes:
       - "./:/var/www/app"
   redis:
