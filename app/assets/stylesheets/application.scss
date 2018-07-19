@@ -13,7 +13,15 @@
  *= require_self
  *= require_tree .
  */
- 
+
+.bg-cb {
+    background-color: #6C8532 !important;
+}
+
+:root {
+    --cb: #6C8532;
+}
+
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
