@@ -6,4 +6,8 @@ Rails.application.routes.draw do
 
   resources :comments, only: %w[create show]
   root to: 'comments#index'
+
+  namespace :api do
+    resources :comments, only: %w[index create]
+  end
 end

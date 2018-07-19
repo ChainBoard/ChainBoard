@@ -51,6 +51,11 @@ html
     link href="/icon-24x24.png" rel="icon" sizes="24x24" type="image/png"
     link href="/icon-32x32.png" rel="icon" sizes="32x32" type="image/png"
 
+    script[src="/static/js/arbor.js"]
+    script[src="/static/js/arbor-tween.js"]
+    script[src="/static/js/arbor-graphics.js"]
+    script[src="/static/js/map.js"]
+
   body
     .bs-component.bg-dark
       nav.navbar.navbar-dark.bg-cb.navbar-expand-md.fixed-top
@@ -66,6 +71,9 @@ html
               form.form-inline.mt-2.mt-md-1 action="/" method="get"
                 input.form-control.mr-sm-2 aria-label="Search form" type="search" name="body"
                 button.btn.btn-light.my-2.my-sm-0 aria-label="Search submit button" type="submit" Search
+            - if request.path_info == '/'
+              .nanbar-nav
+                button.btn.btn-info type="button" data-toggle="collapse" data-target="#map" aria-label="Map switch button" Map(β)
             .navbar-nav
               a.nav-item.nav-link href="/about" About
 
