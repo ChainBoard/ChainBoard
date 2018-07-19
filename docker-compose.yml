@@ -12,6 +12,7 @@ services:
     image: "mariadb"
     volumes:
       - "./docker/mariadb/data:/var/lib/mysql"
+    restart: always
   rails:
     build:
       args:
@@ -37,10 +38,12 @@ services:
       - "4000:3000"
     volumes:
       - "./:/var/www/app"
+    restart: always
   redis:
     expose:
       - "6379"
     image: "redis"
+    restart: always
   solr:
     command: "solr-precreate mycore /var/lib/solr/config"
     expose:
@@ -48,3 +51,4 @@ services:
     image: "solr:6"
     volumes:
       - "./docker/solr/config:/var/lib/solr/config"
+    restart: always
