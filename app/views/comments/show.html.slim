@@ -1,0 +1,80 @@
+- provide(:title, 'ID:' + @comment.id.to_s)
+
+.container
+  .card-block
+    .card.card-default.mb-3
+      .card-block.m-3
+        .d-flex
+          span.h3 ID:#{@comment.id}
+          - if @comment.fetch_comment.present?
+            span.h3.ml-3
+              | Parent's ID:
+              = link_to(@comment.fetch_comment.id, comment_path(@comment.fetch_comment))
+        - if @comment.fetch_comment.present?
+          p.text-muted
+            = comment_body_format(@comment.fetch_comment.body)
+        p.h4
+          = comment_body_format(@comment.body)
+        .d-lg-flex.justify-content-between
+          .d-md-flex.flex-row
+            .h5
+              | User Name:
+              = link_to(@comment.user_display_name, root_path(user_display_name: @comment.user_display_name))
+            .h5
+              | (KEY:
+              = link_to(@comment.user_name, root_path(user_name: @comment.user_name))
+              | )
+          .h6.text-muted.align-self-lg-end
+            | Date:
+            time #{@comment.created_at}
+
+  h2 Children
+  - if @comment.fetch_comments.present?
+    .card-block
+        - @comment.fetch_comments.each do |comment|
+          .card.card-default.mb-3
+            .card-block.m-3
+              .d-flex
+                span.h3
+                  | ID:
+                  = link_to(comment_path(comment)) do
+                    = comment.id
+              p.h4
+                = comment_body_format(comment.body)
+              .d-lg-flex.justify-content-between
+                .d-md-flex.flex-row
+                  .h5
+                    | User Name:
+                    = link_to(comment.user_display_name, root_path(user_display_name: comment.user_display_name))
+                  .h5
+                    | (KEY:
+                    = link_to(comment.user_name, root_path(user_name: comment.user_name))
+                    | )
+                .h6.text-muted.align-self-lg-end Date: #{comment.created_at}
+  - else
+    span.h5 NO CHILDREN!!
+
+  h2.mt-1 Make new Child!
+
+  .card-block
+    .card.card-default
+      .card-block.m-3
+        .form-group
+          = form_with(model: @new_comment, local: true) do |f|
+            label for="bodyText"  Text
+            = f.text_area(:body, id: :bodyText, class: 'form-control', rows: '4', required: true, maxlength: '280',
+                  placeholder: 'Max 280 Character')
+            .form-row.mt-1
+              .col-md.mt-1
+                label for="userName"  User Name
+                = f.text_field(:user_display_name,
+                      id: :userDisplayName, class: 'form-control', placeholder: 'Option (Max 50 Character)',
+                      type: 'text', maxlength: '50')
+              .col-md.mt-1
+                label for="userKey"  KEY
+                = f.text_field(:user_name,
+                      id: :userName, class: 'form-control', placeholder: 'Option (Max 16 Character)',
+                      type: 'password', maxlength: '16')
+            .d-flex.flex-column.align-items-stretch.mt-3
+              button.btn.btn-primary type="submit" POST
+            = f.hidden_field(:comment_id)
