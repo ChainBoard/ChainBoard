@@ -52,10 +52,12 @@ html
     link href="/icon-32x32.png" rel="icon" sizes="32x32" type="image/png"
 
   body
-    .bs-component
-      nav.navbar.navbar-dark.bg-dark.navbar-expand-md.fixed-top
+    .bs-component.bg-dark
+      nav.navbar.navbar-dark.bg-cb.navbar-expand-md.fixed-top
         .container
-          = link_to('ChainBoard', root_path, class: 'navbar-brand')
+          a.navbar-brand href="/"
+            img src="/android-chrome-128x128.png" width="30" height="30" class="d-inline-block align-top" alt="logo"
+            span ChainBoard
           button.navbar-toggler (aria-controls="Navbar" aria-expanded="false" aria-label="Toggle Navigation"
                 data-target="#Navbar" data-toggle="collapse" type="button")
             span.navbar-toggler-icon
@@ -65,8 +67,7 @@ html
                 input.form-control.mr-sm-2 aria-label="Search form" type="search" name="body"
                 button.btn.btn-light.my-2.my-sm-0 aria-label="Search submit button" type="submit" Search
             .navbar-nav
-              a.nav-item.nav-link href="#" Some
-              a.nav-item.nav-link href="#" Thing
+              a.nav-item.nav-link href="/about" About
 
     - if flash[:alert]
       .container
