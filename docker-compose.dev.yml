@@ -1,0 +1,42 @@
+version: "3"
+services:
+  mariadb:
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+    expose:
+      - "3306"
+    image: "mariadb"
+  rails:
+    build:
+      args:
+        GEMFILE: "Gemfile"
+        GEMFILE_LOCK: "Gemfile.lock"
+      context: "./"
+      dockerfile: "./docker/rails/Dockerfile"
+    environment:
+      DOCKERIZE_HOSTS: "mariadb:3306 redis:6379 solr:8983"
+      RAILS_DATABASE_HOST: "mariadb"
+      RAILS_DATABASE_PASSWORD: "password"
+      RAILS_DATABASE_USERNAME: "root"
+      RAILS_REDIS_HOST: "redis"
+      RAILS_ROOT: "/var/www/app"
+      RAILS_SOLR_HOST: "solr"
+      RAILS_SOLR_PATH: "/solr/mycore"
+      RAILS_TASKS: "assets:precompile db:create db:migrate db:seed sunspot:reindex"
+    image: "cojt-board-project-rails"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./:/var/www/app"
+  redis:
+    expose:
+      - "6379"
+    image: "redis"
+  solr:
+    command: "solr-precreate mycore /var/lib/solr/config"
+    expose:
+      - "8983"
+    image: "solr:6"
+    volumes:
+      - "./docker/solr/config:/var/lib/solr/config"
