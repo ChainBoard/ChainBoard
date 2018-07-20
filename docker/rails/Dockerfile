@@ -13,11 +13,15 @@ COPY ["$GEMFILE", \
 
 WORKDIR $RAILS_ROOT
 
-RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+    && apt install -y nodejs \
+    && rm -rf /var/lib/apt/lists/* \
+    && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && gem install bundler \
     && bundle install \
+    && npm install -g yarn \
     && echo '#!/bin/bash\n\
 if [ -f tmp/pids/server.pid ]; then rm tmp/pids/server.pid; fi\n\
 if [ -f tmp/sockets/puma.sock ]; then rm tmp/sockets/puma.sock; fi\n\
