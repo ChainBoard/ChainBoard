@@ -22,7 +22,7 @@ services:
       dockerfile: "./docker/rails/Dockerfile"
     command: "puma -w 4"
     environment:
-      DOCKERIZE_HOSTS: "mariadb:3306 redis:6379 solr:8983"
+      DOCKERIZE_HOSTS: "mariadb:3306 redis:6380 solr:8983"
       RAILS_DATABASE: "cojtswbp_database"
       RAILS_DATABASE_HOST: "mariadb"
       RAILS_DATABASE_PASSWORD: "cojtswbp_password"
@@ -41,7 +41,7 @@ services:
     restart: always
   redis:
     expose:
-      - "6379"
+      - "6380"
     image: "redis"
     restart: always
   solr:
