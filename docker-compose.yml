@@ -2,7 +2,7 @@ version: "3"
 services:
   mariadb:
     # in case of windows
-    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_c --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON"
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON"
     #command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
     environment:
       MYSQL_DATABASE: "cojtswbp_database"
