@@ -1,21 +1,83 @@
 .container
   h1 What's This
   p これは木構造を持った掲示板(の様なもの)です。
+  p もしかすると掲示板とSNSの間のものかもしれません。
+  p ともかく新しいコミュニケーションのかたちだと思います。
+  h2 Presentation Movie
+  p 準備中
   h2 How to use
-  h3 Top
+  h3 
+    a href="/" Top
   p トップページです。
     直近30件の書き込みが表示されています。
   h3 Search
   p 上部に有るのが検索フォームです。
     検索することができます。
-  h3 Comment
+  h3 
+    a href="/comments/1" Comment
   p コメントのIDをクリック(タップ)するとそのコメントのページに飛びます。書き込みもここからです。
-  h2 Q&A
-  text.text-secondary 一つも来てないけど
+  h3 POST
+  p すべてのコメントは親となるコメントを持ちます。親にしたいコメントを選びそのコメントページ下部から投稿してください。
+  h4 Text
+  p コメントの本文です。ハッシュタグが使えます。最大280文字です。
+  h4 User Name
+  p 表示される名前です。空欄だと"Anonymous"になります。最大50文字です。
+  h4 KEY
+  p
+    |いわゆる
+    a href="https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%AA%E3%83%83%E3%83%97_(%E9%9B%BB%E5%AD%90%E6%8E%B2%E7%A4%BA%E6%9D%BF)" トリップ
+    |のようなものです。空欄だと"Anonymous"になります。最大16文字です。なりすましを防ぎたい場合は利用してください。
+  h2 
+    |Q&A
+    small.text-muted 一つも来てないけど
   h3.h4 Q.トップページに戻りたい
   p A.左上のロゴ部分からトップページに戻れます
+  h3.h4 Q.右上(もしくはハンバーガーメニューの中)に有るMap(β)とはなんですか
+  p A.投稿をグラフィカルに可視化する機能です。が、まだ開発中なのでちゃんとは動きません。ごめんなさい。
+  h3.h4 Q.投稿にURLを埋め込んでリンクを張ったりすることは可能ですか
+  p A.XSSを防ぐためやユーザー保護のため現時点では不可能になっています。ただ、要望が多ければ考えます。
+  h3.h4 Q.投稿に埋め込めるものはなにかありますか
+  p A.ハッシュタグが使えます。"#ハッシュタグの中身"の形式で書いてください。ハッシュタグは一つごとにスペースで区切ってください。言語を問わずご利用いただけます。検索の際は検索フォームに"#ハッシュタグの中身"の形式で書いて検索してください。
+  p あと改行も使えます。
+  h3.h4 Q.何を投稿してもいいのですか
+  p 
+    |A.とりあえず深呼吸して
+    strong よく
+    |考えてみてください。
+  h3.h4 Q.投稿した内容はどのように取り扱われますか
+  p A.少なくともインターネット上に公開されるわけですから私達の知るところではないところで利用されるかもしれません。
+  p なので原則としてどうなってもいいことだけを投稿するのが良いと思います。
+  p.text-muted そもそもこれはインターネット全体に言える話ですが…
+  h3.h4 Q.Is there English ver How to use and Q&A?
+  p A.Sorry, it is under preparation. Please use Google Translate till we made it.
   h3.h4 Q.バグを見つけました
-  p A.報告してください
+  p A.報告してください(下のContactからお願いします)
   h2 Contact
-  p この辺からどうぞ
-  
+  h3 ChainBoard
+  h4 Admin
+  p
+    |KEY:
+    a href="/?user_name=vslKuyfz96" hoge
+  h3 Twitter
+  p
+    a href="https://twitter.com/cb_marimo_moe" @CB_marimo_moe
+  br
+  h2 And then...
+  p
+  |このサービスは
+  a href="http://inf.tsukuba.ac.jp/ET-COJT/" 筑波大学COJT
+  | 第10期 SWコースの成果物です。
+  h3 Developed by
+  p
+    a href="" 
+    text.text-muted  KEY:
+    a href="" hoge
+    | & 
+    a href="https://marimo.moe/" marimo 
+    text.text-muted  KEY:
+    a href="" hoge
+  h3 Server Admin
+  p
+    a href="https://marimo.moe/" marimo
+    text.text-muted  KEY:
+    a href="" hoge
