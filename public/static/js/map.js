@@ -20,7 +20,10 @@ var QueryUI = function(query, callback) {
 
         for (var i = 0; i < response.comments.length; i++) {
             commentNodes[response.comments[i].id] = withDefaultStyle(response.comments[i]);
-            commentNodes[response.comments[i].parent.id] = withDefaultStyle(response.comments[i].parent);
+
+            if (response.comments[i].parent !== null) {
+                commentNodes[response.comments[i].parent.id] = withDefaultStyle(response.comments[i].parent);
+            }
 
             for (var j = 0; j < response.comments[i].children.length; j++) {
                 commentNodes[response.comments[i].children[j].id] = withDefaultStyle(response.comments[i].children[j]);
@@ -29,13 +32,13 @@ var QueryUI = function(query, callback) {
 
         var commentEdges = {};
         for (var i = 0; i < response.comments.length; i++) {
-            if (response.comments[i].parent !== undefined) {
+            if (response.comments[i].parent !== null) {
                 if (commentEdges[response.comments[i].parent.id] === undefined) {
                     commentEdges[response.comments[i].parent.id] = {};
                 }
-                commentEdges[response.comments[i].parent.id][response.comments[i].id] = { length: 8 };
+                commentEdges[response.comments[i].parent.id][response.comments[i].id] = {};
             }
-            if (response.comments[i].children !== undefined) {
+            if (response.comments[i].children.length > 0) {
                 if (commentEdges[response.comments[i].id] === undefined) {
                     commentEdges[response.comments[i].id] = {};
                 }
