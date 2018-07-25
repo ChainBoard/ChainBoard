@@ -76,5 +76,5 @@
                       id: :userName, class: 'form-control', placeholder: 'Option (Max 16 Character)',
                       type: 'password', maxlength: '16')
             .d-flex.flex-column.align-items-stretch.mt-3
-              button.btn.btn-primary type="submit" POST
+              button.btn.btn-primary type="submit" data-disable-with="Sending..." POST
             = f.hidden_field(:comment_id)
