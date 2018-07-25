@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::CommentsController < ApplicationController
   def index
     @search_params = index_params
