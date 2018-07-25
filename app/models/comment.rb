@@ -27,7 +27,8 @@ class Comment < ApplicationRecord
 
   def crypt_user_name
     self.user_name = if user_name.present?
-                       user_name.crypt(user_name + 'salt').slice(2, 10)
+                       salt = user_name.split('').select {|c| /[A-Za-z0-9.\/]/ =~ c}.join('') + 'salt'
+                       user_name.crypt(salt).slice(2, 10)
                      else
                        'Anonymous'
                      end
