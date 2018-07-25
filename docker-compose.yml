@@ -5,10 +5,10 @@ services:
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON"
     #command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
     environment:
-      MYSQL_DATABASE: "cojtswbp_database"
-      MYSQL_PASSWORD: "cojtswbp_password"
+      MYSQL_DATABASE: "ChainBoard_database"
+      MYSQL_PASSWORD: "${ChainBoard_password}"
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_USER: "cojtswbp_user"
+      MYSQL_USER: "ChainBoard_user"
     expose:
       - "3306"
     image: "mariadb"
@@ -27,10 +27,10 @@ services:
     command: "puma -w 4"
     environment:
       DOCKERIZE_HOSTS: "mariadb:3306 redis:6380 solr:8983"
-      RAILS_DATABASE: "cojtswbp_database"
+      RAILS_DATABASE: "ChainBoard_database"
       RAILS_DATABASE_HOST: "mariadb"
-      RAILS_DATABASE_PASSWORD: "cojtswbp_password"
-      RAILS_DATABASE_USERNAME: "cojtswbp_user"
+      RAILS_DATABASE_PASSWORD: "${ChainBoard_password}"
+      RAILS_DATABASE_USERNAME: "ChainBoard_user"
       RAILS_ENV: "production"
       RAILS_REDIS_HOST: "redis"
       RAILS_ROOT: "/var/www/app"
