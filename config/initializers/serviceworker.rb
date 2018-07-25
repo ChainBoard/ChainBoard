@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   config.serviceworker.routes.draw do
     # map to assets implicitly
-    match "/serviceworker.js"
-    match "/manifest.json"
-    #match "serviceworker.js" => "assets/serviceworker.js"
-    #match "manifest.js" => "assets/manifest.js"
-    #match "/*/serviceworker.js" => "assets/serviceworker.js"
-    #match "/*/manifest.json" => "assets/manifest.json"
-    
+    match '/serviceworker.js'
+    match '/manifest.json'
+    # match "serviceworker.js" => "assets/serviceworker.js"
+    # match "manifest.js" => "assets/manifest.js"
+    # match "/*/serviceworker.js" => "assets/serviceworker.js"
+    # match "/*/manifest.json" => "assets/manifest.json"
+
     # Examples
     #
     # map to a named asset explicitly
